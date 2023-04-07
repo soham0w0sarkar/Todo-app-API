@@ -26,4 +26,6 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/task", taskRouter);
 app.use(errorMidlleWare);
 
-app.get("/", "Greate");
+app.get("/", (req, res) => {
+  res.send("<h1>Hello Everynian</h1>");
+});

@@ -25,3 +25,5 @@ app.use(
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/task", taskRouter);
 app.use(errorMidlleWare);
+
+app.get("/", "Greate");

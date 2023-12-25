@@ -6,10 +6,11 @@ export const sendCookie = (user, res, message, statusCode = 200) => {
   res
     .status(statusCode)
     .cookie("token", token, {
+      path: "/",
       httpOnly: true,
       maxAge: 30 * 60 * 1000,
-      sameSite: process.env.STAGE === "DEVELOPMENT" ? "lax" : "none",
-      secure: process.env.STAGE !== "DEVELOPMENT",
+      sameSite: "None",
+      secure: false,
     })
     .json({
       success: true,
@@ -21,7 +22,7 @@ export const isAuthenciated = async (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token)
-    return res.status(404).json({
+    return res.status(401).json({
       success: false,
       message: "PLease Login",
     });

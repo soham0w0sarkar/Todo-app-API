@@ -14,7 +14,7 @@ router.post("/create", isAuthenciated, createTask);
 router.get("/myTask", isAuthenciated, myTask);
 
 router
-  .route("/:id")
+  .route("/update/:id")
   .put(isAuthenciated, completed)
   .delete(isAuthenciated, deleteTask);
 

@@ -3,16 +3,16 @@ import errorHandler from "../utils/error.js";
 
 export const createTask = async (req, res, next) => {
   try {
-    const { title, description } = req.body;
+    const { title } = req.body;
 
-    await Task.create({
+    const task = await Task.create({
       title,
-      description,
       createdBy: req.user,
     });
 
     res.status(201).json({
       success: true,
+      id: task._id,
       message: "Task Created Sucessfully",
     });
   } catch (error) {
@@ -44,7 +44,7 @@ export const completed = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Task Completed",
+      message: "Task Updated Successfully",
     });
   } catch (error) {
     next(error);

@@ -27,6 +27,7 @@ app.use(
       "Access-Control-Allow-Origin",
       "Content-Type",
       "Authorization",
+      "Set-Cookie",
     ],
   })
 );

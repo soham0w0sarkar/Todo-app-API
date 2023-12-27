@@ -8,8 +8,8 @@ export const sendCookie = (user, res, message, statusCode = 200) => {
     .cookie("token", token, {
       path: "/",
       httpOnly: true,
-      maxAge: 30 * 60 * 1000,
-      sameSite: "None",
+      maxAge: 3 * 24 * 60 * 60 * 1000,
+      sameSite: "Lax",
       secure: false,
     })
     .json({

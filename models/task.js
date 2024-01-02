@@ -9,10 +9,19 @@ const taskSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  completedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  taskFor: {
+    type: String,
+    enum: ["personal", "company"],
+    default: "personal",
+  },
   completed: {
     type: Boolean,
     default: false,
   },
 });
 
-export const Task = new mongoose.model("Task", taskSchema);
+export default mongoose.model("Task", taskSchema);

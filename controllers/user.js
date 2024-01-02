@@ -1,11 +1,15 @@
 import bcrypt from "bcrypt";
-import { User } from "../models/user.js";
+import User from "../models/user.js";
+import Company from "../models/company.js";
 import { sendCookie } from "../utils/features.js";
 import errorHandler from "../utils/error.js";
 
 export const register = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, companyId } = req.body;
+
+    if (!name || !email || !password || !companyId)
+      return next(new errorHandler("Please provide all the fields", 400));
 
     let user = await User.findOne({ email });
 
@@ -16,8 +20,18 @@ export const register = async (req, res, next) => {
     user = await User.create({
       name,
       email,
+      companyId,
       password: hashedPass,
     });
+
+    if (companyId !== "") {
+      const company = await Company.findOne({ companyId });
+
+      if (!company) return next(new errorHandler("Company not found", 404));
+
+      company.employees.push(user._id);
+      await company.save();
+    }
 
     sendCookie(user, res, "Registered Succesfully", 201);
   } catch (error) {

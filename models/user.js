@@ -15,10 +15,14 @@ const userSchema = new mongoose.Schema({
     required: true,
     select: false,
   },
+  companyId: {
+    type: String,
+    default: null,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
   },
 });
 
-export const User = new mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);

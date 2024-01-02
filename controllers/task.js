@@ -1,4 +1,4 @@
-import { Task } from "../models/task.js";
+import Task from "../models/task.js";
 import errorHandler from "../utils/error.js";
 
 export const createTask = async (req, res, next) => {
@@ -22,7 +22,9 @@ export const createTask = async (req, res, next) => {
 
 export const myTask = async (req, res, next) => {
   try {
-    const tasks = await Task.find({ createdBy: req.user._id });
+    let tasks = await Task.find({ createdBy: req.user._id });
+
+    tasks = tasks.filter((task) => task.taskFor === "personal");
 
     res.status(200).json({
       success: true,

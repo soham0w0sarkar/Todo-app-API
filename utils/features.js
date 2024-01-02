@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.js";
+import Company from "../models/company.js";
+import User from "../models/user.js";
 
 export const sendCookie = (user, res, message, statusCode = 200) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
@@ -30,5 +31,21 @@ export const isAuthenciated = async (req, res, next) => {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
   req.user = await User.findById(decoded._id);
+  next();
+};
+
+export const isEmployee = async (req, res, next) => {
+  const { user } = req;
+  const { companyId } = req.body;
+
+  const company = await Company.findById(companyId);
+
+  if (!company) {
+    return next(new errorHandler("Company not found", 404));
+  }
+
+  if (!company.employees.includes(user)) {
+    return next(new errorHandler("User is not an employee", 401));
+  }
   next();
 };

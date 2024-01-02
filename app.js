@@ -1,20 +1,18 @@
 import express, { json } from "express";
-import userRouter from "./routes/user.js";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
-import taskRouter from "./routes/task.js";
 import { errorMidlleWare } from "./utils/error.js";
 import cors from "cors";
 
-const app = express();
+import userRouter from "./routes/user.js";
+import companyRouter from "./routes/company.js";
+import taskRouter from "./routes/task.js";
 
 config({
   path: "./data/config.env",
 });
 
-//adding midllewares
-app.use(express.json());
-app.use(cookieParser());
+const app = express();
 
 app.use(
   cors({
@@ -32,12 +30,17 @@ app.use(
   })
 );
 
+app.use(express.json());
+app.use(cookieParser());
+
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/task", taskRouter);
-app.use(errorMidlleWare);
+app.use("/api/v1/company", companyRouter);
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello Everynian</h1>");
 });
+
+app.use(errorMidlleWare);
 
 export default app;

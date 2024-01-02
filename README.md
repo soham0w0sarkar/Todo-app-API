@@ -7,16 +7,19 @@ This is a RESTful API for a Todo app built using Node.js, Express, and MongoDB. 
 To install and run this project locally, follow these steps:
 
 1. Clone this repository:
+
 ```bash
 git clone https://github.com/soham0w0sarkar/Todo-app-API.git
 ```
 
 2. Install the dependencies:
+
 ```bash
 npm install
 ```
 
 3. Create a `.env` file in the root directory with the following environment variables:
+
 ```javascript
 MONGODB_URI=<your-mongodb-uri>
 PORT=<port-number>
@@ -28,7 +31,6 @@ JWT_SECRET=<your-jwt-secret>
 ```bash
 npm start
 ```
-
 
 ## Usage
 
@@ -42,6 +44,18 @@ This API provides the following endpoints:
 - `GET/myTask` - Get all your Tasks
 - `PUT /task/:id` - Update a task by ID
 - `DELETE /task/:id` - Delete a task by ID
+
+### Events
+
+- `join` - Emit to join a room
+- `createTask` - Emit to create a new task
+- `updateTask` - Emit to update a task
+- `deleteTask` - Emit to delete a task
+- `newTask` - Emitted when get a new task
+- `updatedTask` - Emitted when a task is updated
+- `deletedTask` - Emitted when a task is deleted
+- `tasks` - Emitted when get all tasks
+- `error` - Emitted when an error occurs
 
 ### Authentication
 
@@ -67,7 +81,3 @@ Contributions are welcome! If you find a bug or have a feature request, please o
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-
-
-

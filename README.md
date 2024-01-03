@@ -18,7 +18,7 @@ git clone https://github.com/soham0w0sarkar/Todo-app-API.git
 npm install
 ```
 
-3. Create a `.env` file in the root directory with the following environment variables:
+3. Create a `config.env` file in the `data` folder with the following environment variables:
 
 ```javascript
 MONGODB_URI=<your-mongodb-uri>

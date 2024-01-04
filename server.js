@@ -30,14 +30,14 @@ io.on("connection", (socket) => {
     const company = await Company.findOne({ companyId });
 
     if (!company) {
-      return socket.emit("error", "Company not found");
+      return socket.emit("error", "Company not found, please register first");
     }
 
     console.log("User joined", companyId);
 
     socket.join(companyId);
     socket.userId = user._id;
-    
+
     const tasks = await Task.find({
       createdBy: { $in: company.employees },
       taskFor: "company",
